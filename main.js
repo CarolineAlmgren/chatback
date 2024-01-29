@@ -36,3 +36,42 @@ const messages = [
     id: 8,
   },
 ];
+
+
+
+app.get('/api/messages/:userId',(req, res)=>{
+  console.log(req.params.userId);
+  let p = messages.find(message=>message.id == req.params.userId)
+  if (p == undefined){
+    res.status(404).send("finns inte")
+  }
+   res.json(result)
+});
+
+
+
+
+app.get('/api/messages',(req, res)=>{
+  let result = messages.map(p=>({
+      id: p.id,
+      message: p.message
+  }))
+   res.json(result)
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening2 on port ${port}`)
+})
+
+/*app.get("/api/messages", (req, res) => {
+  res.json(messages);
+})
+
+app.get("/api/messages:message", (req, res) => {
+  console.log(req.params.messageId);
+  let message = messages.find(messages => messages.id == req.params.messageId);
+  if (p == undefined){
+    res.status(404).send("not found")
+  }
+  res.json(message)
+})*/
