@@ -6,7 +6,10 @@ const { sequelize, chatuser } = require('./models')
 const userController  = require('./controllers/userController.js')
 const migrationhelper = require('./migrationhelper')
 
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:5500",
+  credentials:true
+}));
 
 const messages = [
   {
@@ -53,6 +56,11 @@ app.get('/api/messages/:userId',(req, res)=>{
 
 app.post('/api/useraccount', userController.onCreateUser)
 
+app.listen(port, async () =>{
+  await migrationhelper.migrate()
+  await sequelize.authenticate()
+  console.log(`Example app listening2 on port ${port}`)
+})
 
 
 
