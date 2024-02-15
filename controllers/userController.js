@@ -1,4 +1,5 @@
-const chatuser = require("../models/chatuser")
+//const chatuser = require("../models/chatuser")
+const { sequelize, chatUser } = require('../models')
 
 async function onCreateUser(req,res){
 
@@ -7,7 +8,7 @@ async function onCreateUser(req,res){
     // let hashedPassword = "hasha" (password)
     //let hashedPassword = await bcrypt.hash(password,10)
 
-    await chatuser.create({
+    await chatUser.create({
         Username,
         // email,
         // password: hashedPassword
