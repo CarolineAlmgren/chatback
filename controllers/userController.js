@@ -17,7 +17,23 @@ async function onCreateUser(req,res){
     res.status(204).json({ Username })
 }
 
+async function loginUserAccount (req,res){
+
+    const {Username} = req.body
+
+    const user = await chatUser.findOne({
+        where: {Username}
+    });
+    if (!user) {
+        return res.status(401).json('Could not login');
+    }
+
+    res.json({status:"Yepp"})
+}
+
+
 
 module.exports = {
-    onCreateUser
+    onCreateUser,
+    loginUserAccount
 }

@@ -7,7 +7,10 @@ const userController  = require('./controllers/userController.js')
 const migrationhelper = require('./migrationhelper')
 
 app.use(express.json())
-app.use(cors());
+app.use(cors({
+  origin:"http://127.0.0.1:5500",
+  credentials:true
+}));
 
 const messages = [
   {
@@ -53,6 +56,7 @@ app.get('/api/messages/:userId',(req, res)=>{
 });
 
 app.post('/api/useraccount', userController.onCreateUser)
+app.post('/api/chatuser', userController.loginUserAccount)
 
 app.listen(port, async () =>{
   await migrationhelper.migrate()
