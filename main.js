@@ -6,10 +6,8 @@ const { sequelize, chatuser } = require('./models')
 const userController  = require('./controllers/userController.js')
 const migrationhelper = require('./migrationhelper')
 
-app.use(cors({
-  origin:"http://localhost:5500",
-  credentials:true
-}));
+app.use(express.json())
+app.use(cors());
 
 const messages = [
   {
@@ -72,9 +70,9 @@ app.get('/api/messages',(req, res)=>{
    res.json(result)
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening2 on port ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening2 on port ${port}`)
+// })
 
 /*app.get("/api/messages", (req, res) => {
   res.json(messages);
