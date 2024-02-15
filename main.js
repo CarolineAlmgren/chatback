@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const { sequelize, chatuser } = require('./models')
+const userController  = require('./controllers/userController.js')
 
 app.use(cors());
 
@@ -48,6 +49,8 @@ app.get('/api/messages/:userId',(req, res)=>{
   }
    res.json(result)
 });
+
+app.post('/api/useraccount', userController.onCreateUser)
 
 
 

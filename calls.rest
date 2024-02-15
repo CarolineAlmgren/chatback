@@ -1,0 +1,9 @@
+### Signup Create user
+
+POST http://localhost:3000/api/useraccount
+Content-Type: application/json; charset=utf-8
+
+{
+    "username": "Niklas"
+
+}
