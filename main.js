@@ -5,6 +5,7 @@ const port = 3000;
 const { sequelize, chatuser } = require('./models')
 const userController  = require('./controllers/userController.js')
 const migrationhelper = require('./migrationhelper')
+const session = require("express-session");
 
 app.use(express.json())
 app.use(cors({

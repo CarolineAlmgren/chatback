@@ -1,5 +1,6 @@
 //const chatuser = require("../models/chatuser")
 const { sequelize, chatUser } = require('../models')
+const bcrypt = require('bcrypt')
 
 async function onCreateUser(req,res){
 
