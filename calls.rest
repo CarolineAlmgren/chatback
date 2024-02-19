@@ -4,6 +4,6 @@ POST http://localhost:3000/api/chatuser
 Content-Type: application/json; charset=utf-8
 
 {
-    "Username": "Nikla"
+    "Username": "Niklas"
 
 }
