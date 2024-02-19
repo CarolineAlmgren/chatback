@@ -6,6 +6,8 @@ const { sequelize, chatuser } = require('./models')
 const userController  = require('./controllers/userController.js')
 const migrationhelper = require('./migrationhelper')
 const session = require("express-session");
+const { validateCreateUser } = require('./middlewares/validators/userValidators.js');
+const {requireAuth} = require('./middlewares/requireAuth.js')
 
 app.use(express.json())
 app.use(cors({
@@ -64,7 +66,7 @@ app.get('/api/messages/:userId',(req, res)=>{
 
 app.get('/hej', userController.onHej)
 
-app.post('/api/useraccount', userController.onCreateUser)
+app.post('/api/useraccount', validateCreateUser, userController.onCreateUser)
 app.post('/api/chatuser', userController.loginUserAccount)
 
 app.listen(port, async () =>{
