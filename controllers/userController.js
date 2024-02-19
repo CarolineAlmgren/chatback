@@ -2,6 +2,19 @@
 const { sequelize, chatUser } = require('../models')
 const bcrypt = require('bcrypt')
 
+async function onHej(req,res){
+    // Cookien och vem är inloggad ???  ->  req
+
+    // Ta den inloggade och hämta från DB
+    //
+    const id = req.session.userId
+    const user = await UserAccount.findOne({
+        where: {id}
+    });
+    
+    res.json(user)    
+}
+
 async function onCreateUser(req,res){
 
     const {Username,password} = req.body
@@ -23,11 +36,18 @@ async function loginUserAccount (req,res){
     const {Username,password} = req.body
 
     const user = await chatUser.findOne({
-        where: {Username,password}
+        where: {Username}
     });
     if (!user) {
         return res.status(401).json('Could not login');
     }
+    
+    const passwordValid = await bcrypt.compare(password, user.password);
+    if (!passwordValid) {
+        return res.status(401).json('Login failed');
+    }    
+
+    req.session.userId = user.id
 
     res.json({status:"Yepp"})
 }
@@ -35,6 +55,7 @@ async function loginUserAccount (req,res){
 
 
 module.exports = {
+    onHej,
     onCreateUser,
     loginUserAccount
 }

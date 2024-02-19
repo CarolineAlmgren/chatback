@@ -45,6 +45,12 @@ const messages = [
   },
 ];
 
+app.use(session({
+  secret: 'my-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  // cookie: { secure: true } HTTPS
+}));
 
 
 app.get('/api/messages/:userId',(req, res)=>{
@@ -55,6 +61,8 @@ app.get('/api/messages/:userId',(req, res)=>{
   }
    res.json(result)
 });
+
+app.get('/hej', userController.onHej)
 
 app.post('/api/useraccount', userController.onCreateUser)
 app.post('/api/chatuser', userController.loginUserAccount)
