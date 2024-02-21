@@ -19,6 +19,13 @@ async function onCreateUser(req,res){
 
     const {Username,password} = req.body
 
+    const user = await chatUser.findOne({
+        where: {Username}
+    });
+    if (user) {
+        return res.status(401).json('Username already exist');
+    }
+    else {
     // let hashedPassword = "hasha" (password)
     let hashedPassword = await bcrypt.hash(password,10)
 
@@ -29,6 +36,7 @@ async function onCreateUser(req,res){
     })
     //Cookien och vem är inloggad?  ->  req
     res.status(204).json({ Username,password })
+}
 }
 
 async function loginUserAccount (req,res){
