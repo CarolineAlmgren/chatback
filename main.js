@@ -11,7 +11,7 @@ const {requireAuth} = require('./middlewares/requireAuth.js')
 
 app.use(express.json())
 app.use(cors({
-  origin:"http://localhost:5500",
+  origin:"http://localhost:5500", 
   credentials:true
 }));
 
@@ -65,6 +65,7 @@ app.get('/api/messages/:userId',(req, res)=>{
 });
 
 app.get('/hej', userController.onHej)
+app.post('/api/sendmessage', userController.onSendMessage)
 
 app.post('/api/useraccount', validateCreateUser, userController.onCreateUser)
 app.post('/api/chatuser', userController.loginUserAccount)
