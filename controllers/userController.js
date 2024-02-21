@@ -8,11 +8,11 @@ async function onHej(req,res){
     // Ta den inloggade och hämta från DB
     //
     const id = req.session.userId
-    const user = await UserAccount.findOne({
+    const user = await chatUser.findOne({
         where: {id}
     });
     
-    res.json(user)    
+    res.json(user)
 }
 
 async function onCreateUser(req,res){
