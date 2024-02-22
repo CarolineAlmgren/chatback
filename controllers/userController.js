@@ -1,5 +1,6 @@
 //const chatuser = require("../models/chatuser")
 const { sequelize, chatUser, message } = require('../models')
+//const {message} = require("../models")
 const bcrypt = require('bcrypt')
 
 async function onHej(req,res){
@@ -63,15 +64,27 @@ async function loginUserAccount (req,res){
 
 async function onSendMessage(req,res){
 
-    const {message,chatUserId} = req.body
+    //const {m:message,chatUserId} = req.body
 
-    await message.create({
-        message,
-        chatUserId
-    })
+    // await message.create({
+    //     message,
+    //     chatUserId
+    // })
 
-    //res.status(204).json({ Username,password })
+    //res.status(204).json({ message,chatUserId })
+
+    try {
+        const user = await message.create({message: req.body.message, chatUserId: req.body.chatUserId })
+    
+        return res.json(user)
+      } catch (err) {
+        console.log(err)
+        return res.status(500).json(err)
+      }
+    res.status(201).send('Created')
 }
+
+
 
 module.exports = {
     onHej,
