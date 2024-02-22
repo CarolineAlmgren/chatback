@@ -3,6 +3,7 @@
 const {
   Model
 } = require('sequelize');
+const chatUser = require('./chatUser')
 module.exports = (sequelize, DataTypes) => {
   class message extends Model {
     /**
