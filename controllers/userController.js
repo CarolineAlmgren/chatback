@@ -16,6 +16,18 @@ async function onHej(req,res){
     res.json(user)
 }
 
+async function getAllMessages(req,res){
+
+    const allMessages = await message.findAll({
+        where: {chatUserId: req.session.userId}
+    });
+
+    
+    res.json(allMessages)
+}
+
+
+
 async function onCreateUser(req,res){
 
     const {Username,password} = req.body
@@ -37,6 +49,7 @@ async function onCreateUser(req,res){
     })
     //Cookien och vem är inloggad?  ->  req
     res.status(204).json({ Username,password })
+
 }
 }
 
@@ -90,5 +103,6 @@ module.exports = {
     onHej,
     onCreateUser,
     loginUserAccount,
-    onSendMessage
+    onSendMessage,
+    getAllMessages
 }

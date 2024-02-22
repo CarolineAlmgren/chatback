@@ -15,6 +15,37 @@ app.use(cors({
   credentials:true
 }));
 
+// const messages = [
+//   {
+//     message: "What are you people doing?",
+//     id: 1,
+//   },
+//   {
+//     message: " Hey, feeling calm today. Time travel anyone?",
+//     id: 2,
+//   },
+//   {
+//     message: "who else is online?",
+//     id: 3,
+//   },
+//   {
+//     message:
+//       "Im also online. And if you wonder, yes, the original - Steve Rodgers",
+//     id: 4,
+//   },
+//   {
+//     message: "Im also online. How are you people?",
+//     id: 5,
+//   },
+//   {
+//     message: "I am fine.",
+//     id: 6,
+//   },
+//   {
+//     message: "We are doing fine. I am in.",
+//     id: 8,
+//   },
+// ];
 
 app.use(session({
   secret: 'my-secret-key',
@@ -24,16 +55,17 @@ app.use(session({
 }));
 
 
-app.get('/api/messages/:userId',(req, res)=>{
-  console.log(req.params.userId);
-  let p = messages.find(message=>message.id == req.params.userId)
-  if (p == undefined){
-    res.status(404).send("finns inte")
-  }
-   res.json(result)
-});
+// app.get('/api/messages/:userId',(req, res)=>{
+//   console.log(req.params.userId);
+//   let p = messages.find(message=>message.id == req.params.userId)
+//   if (p == undefined){
+//     res.status(404).send("finns inte")
+//   }
+//    res.json(result)
+// });
 
 app.get('/hej', userController.onHej)
+app.get('/api/getallmessages', userController.getAllMessages)
 app.post('/api/sendmessage', userController.onSendMessage)
 
 app.post('/api/useraccount', validateCreateUser, userController.onCreateUser)
@@ -47,13 +79,13 @@ app.listen(port, async () =>{
 
 
 
-app.get('/api/messages',(req, res)=>{
-  let result = messages.map(p=>({
-      id: p.id,
-      message: p.message
-  }))
-   res.json(result)
-});
+// app.get('/api/messages',(req, res)=>{
+//   let result = messages.map(p=>({
+//       id: p.id,
+//       message: p.message
+//   }))
+//    res.json(result)
+// });
 
 // app.listen(port, () => {
 //   console.log(`Example app listening2 on port ${port}`)
