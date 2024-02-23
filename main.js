@@ -66,6 +66,7 @@ app.use(session({
 
 app.get('/hej', userController.onHej)
 app.get('/api/getallmessages', userController.getAllMessages)
+app.get('/api/getallusers', userController.getAllUsers)
 app.post('/api/sendmessage', userController.onSendMessage)
 
 app.post('/api/useraccount', validateCreateUser, userController.onCreateUser)

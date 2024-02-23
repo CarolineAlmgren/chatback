@@ -19,11 +19,23 @@ async function onHej(req,res){
 async function getAllMessages(req,res){
 
     const allMessages = await message.findAll({
-        where: {chatUserId: req.session.userId}
+        //where: {chatUserId: req.session.userId}
     });
+
 
     
     res.json(allMessages)
+}
+
+async function getAllUsers(req,res){
+
+    const allUsers = await chatUser.findAll({
+        //where: {chatUserId: req.session.userId}
+    });
+
+
+    
+    res.json(allUsers)
 }
 
 
@@ -104,5 +116,6 @@ module.exports = {
     onCreateUser,
     loginUserAccount,
     onSendMessage,
-    getAllMessages
+    getAllMessages,
+    getAllUsers
 }
