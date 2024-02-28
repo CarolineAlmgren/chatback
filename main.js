@@ -65,7 +65,7 @@ app.use(session({
 // });
 
 app.get('/hej', userController.onHej)
-app.get('/api/getallmessages', userController.getAllMessages)
+app.get('/api/getallmessages', requireAuth , userController.getAllMessages)
 app.get('/api/getallusers', userController.getAllUsers)
 app.post('/api/sendmessage', userController.onSendMessage)
 
